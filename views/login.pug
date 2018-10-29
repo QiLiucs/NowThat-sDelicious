@@ -1,0 +1,7 @@
+extends layout
+include mixins/loginForm
+include mixins/forgetForm
+block content
+    h2 Login
+    +loginForm()
+    +forgetForm()

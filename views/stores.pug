@@ -1,0 +1,12 @@
+extends layout
+include mixins/storeCard
+block content
+    .inner
+        h1 #{title}
+        //- 用等号
+        //- stores而不是#{stores}
+        //- <pre></pre> 用于调试
+        //- pre= h.dump(stores)
+        .stores
+            each store in stores
+                +storeCard(store)

@@ -1,0 +1,23 @@
+extends layout
+//- tag name and innerHTML
+//- indentation means nested relationship
+//- div.class1.class2#id1
+//-     p#id2 hello!
+//-     a(href="https://www.google.com") google
+
+//- h1 pass params to template
+//- p token is #{token}
+//- input(type="text" value=`${token}`)
+
+//- extends layout
+
+//- 相当于
+//- {% block content%}
+//- <p>content</p>
+//- {unblock content}
+//- block content
+//-     p content
+block content
+    h4 #{h.siteName}
+    h4 #{h.menu[0].title}
+//- h4 h.menu[slug]

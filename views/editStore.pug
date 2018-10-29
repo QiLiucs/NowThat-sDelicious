@@ -1,0 +1,7 @@
+extends layout
+//- 引入mixin
+include mixins/storeForm
+block content
+    h2 #{title}
+    //- h.dump(store)
+    +storeForm(store)

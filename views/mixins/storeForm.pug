@@ -1,0 +1,28 @@
+mixin storeForm(store={})
+    //- p this is mixin #{store.name}
+    //- css files are under folder public/sass/partials
+    form(action=`/add/${store.id || ''}` method="POST" class="card" enctype="multipart/form-data")
+        label(for="name") Name
+        input(type="text" name="name" value=store.name)
+        label(for="desc") Description
+        textarea(name="desc")=store.desc
+        label Photo
+            input(type="file" name="photo" id="photo" accept="image/gif,image/png,image/jpeg")
+            if store.photo
+                img(src=`/uploads/${store.photo}` width=300)
+        label Address
+        //- name必须与model相对应
+        input(type="text" id="address" name="location[address]" value=(store.location&&store.location.address))
+        label Latitude
+        input(type="text" id="lat" name="location[coordinates][0]" value=(store.location&&store.location.coordinates[0]))
+        label Longitude
+        input(type="text" id="lng" name="location[coordinates][1]" value=(store.location&&store.location.coordinates[1]))
+        //- -表示执行js
+        - const choices=["Wifi","Open Late","Family Friendly","Vegatarian","Licensed"]
+        ul.tags
+            each choice in choices
+                //- 类名是tag tag__choice的div
+                .tag.tag__choice
+                    input(type="checkbox" id=choice value=choice name="tags" checked=(store.tags&&store.tags.includes(choice)))
+                    label #{choice}
+        input(type="submit" value="Save" class="button")

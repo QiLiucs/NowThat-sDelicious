@@ -1,0 +1,6 @@
+mixin forgetForm()
+    form.form(action="/account/forget" method="POST")
+        h2 I FORGET MY PASSWORD!
+        label(for="email") Email Address
+        input(type="email" name="email")
+        input.button(type="submit" value="SEND A RESET")
