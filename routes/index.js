@@ -29,13 +29,15 @@ authController.confirmPassword,
 catchErrors(authController.updatePassword))
 //api
 
-router.get("/api/search",catchErrors(helloController.searchStore))
+router.get("/api/search",catchErrors(helloController.searchStore))//these are endpoints
 router.get("/api/stores/near",catchErrors(helloController.mapStores))
 router.post("/api/stores/:storeId/heart",catchErrors(userController.heartAStore))
 router.get("/hearts",authController.isLoggedIn,catchErrors(userController.getHearts))
 router.post("/reviews/:storeId",authController.isLoggedIn,catchErrors(reviewController.addReview))
 
-router.get("/top",helloController.getTopStores)
+router.get("/top",helloController.getTopStores);
+router.get("/map",helloController.mapPage);
+
 // Do work here
 /*
 router.get('/', (req, res) => {

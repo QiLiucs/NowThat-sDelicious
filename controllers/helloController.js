@@ -56,7 +56,7 @@ exports.updateStore=async (req,res)=>{
         new:true,
         runValidators:true
     }).exec();
-    req.flash("success",`Successfully updated <strong>${store.name}</strong>. <a href="/stores/${store.name}"> View Store></a>`)
+    req.flash("success",`Successfully updated <strong>${store.name}</strong>. <a href="/store/${store.name}"> View Store></a>`)
     res.redirect(`/stores/${store._id}/edit`);
 }
 exports.upload=multer(multerOptions).single("photo")
@@ -73,10 +73,13 @@ exports.resize=async(req,res,next)=>{
     await photo.write(`./public/uploads/${req.body.photo}`);
     next();
 }
-exports.getOneStore=async(req,res)=>{
+exports.getOneStore=async(req,res,next)=>{
     // http://localhost:7777/store/99%20Ranch%20Market的params还是99 Ranch Market
     // res.json(req.params);
     const store=await Store.findOne({name:req.params.name}).populate("reviews");
+    if(!store){
+        return next();
+    }
     res.render("store",{store})
 }
 exports.getStoresByTag=async (req,res)=>{
@@ -112,28 +115,30 @@ exports.searchStore=async(req,res)=>{
 }
 
 exports.mapStores=async(req,res)=>{
-    const coordinates=[req.query.lng,req.query.lat].map(parseFloat)
-    
-    console.log(coordinates)
-    const q={
-        location:{
-            $near:{
-                $geometry:{
-                    type:"Point",
+    const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+    console.log(coordinates);
+    const q = {
+        location: {
+            $near: {
+                $geometry: {
+                    type: 'Point',
                     coordinates
                 },
-                $maxDistance:1000//1 km
+                $maxDistance: 10000 // 10km
             }
         }
     };
-    //-表示不选
-    const stores=await Store.find(q);
-    console.log(stores)
-    res.json(stores)
+
+    const stores = await Store.find(q).select('slug name description location photo').limit(10);
+    res.json(stores);
     
 }
 exports.getTopStores=async(req,res)=>{
     const stores=await Store.getTopStores();
     res.render("topStores",{stores:stores,title:"⭐️ Top Stores!"})
     // res.json(stores)
+}
+exports.mapPage=async(req,res)=>{
+
+    res.render('map', { title: 'Map' });
 }

@@ -10,10 +10,10 @@ block content
                 a(href=`/store/${store.name}`) #{store.name}
     
     .single__details.inner
-        //- img.single__map(src=h.staticMap(store.location.coordinates))
-        input#storeLat(type="text" value=store.location.coordinates[0],style="display:none")
-        input#storeLng(type="text" value=store.location.coordinates[1],style="display:none")
-        div#single__gmap
+        img.single__map(src=h.staticMap(store.location.coordinates))
+        //input#storeLat(type="text" value=store.location.coordinates[0],style="display:none")
+        //input#storeLng(type="text" value=store.location.coordinates[1],style="display:none")
+        //div#single__gmap
         p.single__location=store.location.address
         p=store.desc
         //- pre=h.dump(store)

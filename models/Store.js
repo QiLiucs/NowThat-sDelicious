@@ -16,7 +16,7 @@ const storeSchema=new mongoose.Schema({
     location:{
         type:{
             type:String,
-            enum: "Point",
+            // enum: "Point",
             default:"Point"
         },
         coordinates:[{

@@ -1,4 +1,5 @@
 function autocomplete(input,latInput,lngInput){
+
     if(!input) return;//skip this fn from running
     const dropdown=new google.maps.places.Autocomplete(input);
     // 选择一个地点之后，自动填充经纬度值
