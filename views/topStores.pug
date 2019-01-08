@@ -14,7 +14,7 @@ block content
         //- pre=h.dump(store)
         tr
           td
-            a(href=`/store/${store.slug}`)
+            a(href=`/store/${store.name}`)
               img(width=200 src=`/uploads/${store.photo || 'store.png'}` alt=store.name)
           td #{i + 1}
           td: a(href=`/store/${store.name}`)= store.name
